@@ -1,0 +1,43 @@
+@import "../variables";
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $primary;
+  padding: 5px;
+  border-radius: 12px;
+  nav {
+    display: flex;
+
+    .nav-item {
+      margin:0 20px 0 20px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+
+  }
+}
+
+.search-container{
+  display: flex;
+  align-items: center;
+  width: 350px;
+  border: $bg-gray solid 1px;
+  border-radius: 10px;
+  #search {
+    width: 75%;
+    border: none;
+    padding: 10px;
+    background-color: $primary;
+  }
+  button{
+    border: none;
+    height: fit-content;
+    padding: 10px;
+    background-color: transparent;
+    font-size: 20px;
+  }
+}

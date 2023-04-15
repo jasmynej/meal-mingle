@@ -1,0 +1,97 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  username   String    @unique
+  email      String    @unique
+  password   String
+  created_at DateTime  @default(now())
+  recipes    Recipe[]
+  Comment    Comment[]
+
+  @@map("users")
+}
+
+model Category {
+  id      String           @id @default(auto()) @map("_id") @db.ObjectId
+  name    String
+  recipes RecipeCategory[]
+
+  @@map("categories")
+}
+
+model RecipeCategory {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  recipe     Recipe   @relation(fields: [recipeId], references: [id])
+  recipeId   String   @db.ObjectId
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String   @db.ObjectId
+
+  @@map("recipe_category")
+}
+
+model Ingredient {
+  id      String             @id @default(auto()) @map("_id") @db.ObjectId
+  name    String
+  recipes RecipeIngredient[]
+
+  @@map("ingredients")
+}
+
+model RecipeIngredient {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  recipe       Recipe     @relation(fields: [recipeId], references: [id])
+  recipeId     String     @db.ObjectId
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId String     @db.ObjectId
+  amount       Int
+  unit         String
+  direction    String
+
+  @@map("recipe_ingredient")
+}
+
+model Recipe {
+  id           String             @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  description  String
+  userId       String             @db.ObjectId
+  user         User               @relation(fields: [userId], references: [id])
+  categories   RecipeCategory[]
+  ingredients  RecipeIngredient[]
+  recipeImages RecipeImage[]
+  comments     Comment[]
+  directions   String[]
+
+  @@map("recipes")
+}
+
+model RecipeImage {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  fileName String
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId String @db.ObjectId
+
+  @@map("recipe_images")
+}
+
+model Comment {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  content  String
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId String @db.ObjectId
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String @db.ObjectId
+
+  @@map("comments")
+}

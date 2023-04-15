@@ -1,0 +1,39 @@
+ [
+    {
+      "id": 1,
+      "name": "Appetizers"
+    },
+    {
+      "id": 2,
+      "name": "Beverages"
+    },
+    {
+      "id": 3,
+      "name": "Breakfast"
+    },
+    {
+      "id": 4,
+      "name": "Desserts"
+    },
+    {
+      "id": 5,
+      "name": "Main Dishes"
+    },
+    {
+      "id": 6,
+      "name": "Salads"
+    },
+    {
+      "id": 7,
+      "name": "Sandwiches"
+    },
+    {
+      "id": 8,
+      "name": "Side Dishes"
+    },
+    {
+      "id": 9,
+      "name": "Soups & Stews"
+    }
+  ]
+
