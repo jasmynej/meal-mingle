@@ -71,11 +71,6 @@ recipeRouter.get("/:id",async (req:Request,res:Response)=>{
 
     res.json(recipe)
 })
-recipeRouter.get("/category",async (req:Request,res:Response)=>{
-    const categories = await prisma.category.findMany({})
-    res.json(categories)
 
-
-})
 
 export default recipeRouter;

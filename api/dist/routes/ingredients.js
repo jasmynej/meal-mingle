@@ -17,4 +17,12 @@ ingredientRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, functi
     const ingredients = yield prisma.ingredient.findMany({});
     res.json(ingredients);
 }));
+ingredientRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const ingredient = yield prisma.ingredient.findFirst({
+        where: {
+            id: req.params.id
+        }
+    });
+    res.json(ingredient);
+}));
 exports.default = ingredientRouter;

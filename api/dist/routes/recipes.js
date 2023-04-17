@@ -71,8 +71,4 @@ recipeRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, functio
     });
     res.json(recipe);
 }));
-recipeRouter.get("/category", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const categories = yield prisma.category.findMany({});
-    res.json(categories);
-}));
 exports.default = recipeRouter;

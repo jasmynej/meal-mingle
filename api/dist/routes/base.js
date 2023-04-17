@@ -11,21 +11,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const client_1 = require("@prisma/client");
-const userRouter = (0, express_1.Router)();
+const baseRouter = (0, express_1.Router)();
 const prisma = new client_1.PrismaClient();
-userRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const allUsers = yield prisma.user.findMany({});
-    res.json(allUsers);
+baseRouter.get("/categories", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const categories = yield prisma.category.findMany({});
+    res.json(categories);
 }));
-userRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield prisma.user.findFirst({
-        where: {
-            id: req.params.id
-        },
-        include: {
-            recipes: true
-        }
-    });
-    res.json(user);
-}));
-exports.default = userRouter;
+exports.default = baseRouter;

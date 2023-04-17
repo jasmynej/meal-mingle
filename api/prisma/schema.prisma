@@ -17,7 +17,7 @@ model User {
   password   String
   created_at DateTime  @default(now())
   recipes    Recipe[]
-  Comment    Comment[]
+  comments   Comment[]
 
   @@map("users")
 }

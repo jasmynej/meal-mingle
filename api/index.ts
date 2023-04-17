@@ -7,6 +7,7 @@ import cors from 'cors'
 import userRouter from "./routes/users";
 import recipeRouter from "./routes/recipes";
 import ingredientRouter from "./routes/ingredients";
+import baseRouter from "./routes/base";
 
 const app: Express = express();
 const port = 3100;
@@ -19,6 +20,7 @@ app.use(cors(options));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use("/api",baseRouter)
 app.use("/api/users",userRouter)
 app.use("/api/recipes",recipeRouter)
 app.use("/api/ingredients",ingredientRouter)

@@ -9,4 +9,13 @@ ingredientRouter.get("/",async (req:Request,res:Response)=>{
     res.json(ingredients)
 })
 
+ingredientRouter.get("/:id",async (req:Request,res:Response)=>{
+
+    const ingredient: Ingredient | null = await prisma.ingredient.findFirst({
+        where:{
+            id:req.params.id
+        }
+    })
+    res.json(ingredient)
+})
 export default ingredientRouter;

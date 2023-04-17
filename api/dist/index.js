@@ -43,6 +43,7 @@ const cors_1 = __importDefault(require("cors"));
 const users_1 = __importDefault(require("./routes/users"));
 const recipes_1 = __importDefault(require("./routes/recipes"));
 const ingredients_1 = __importDefault(require("./routes/ingredients"));
+const base_1 = __importDefault(require("./routes/base"));
 const app = (0, express_1.default)();
 const port = 3100;
 const options = {
@@ -51,6 +52,7 @@ const options = {
 app.use((0, cors_1.default)(options));
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use(body_parser_1.default.json());
+app.use("/api", base_1.default);
 app.use("/api/users", users_1.default);
 app.use("/api/recipes", recipes_1.default);
 app.use("/api/ingredients", ingredients_1.default);
