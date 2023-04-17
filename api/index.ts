@@ -5,7 +5,6 @@ import express, { Express, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors'
 import userRouter from "./routes/users";
-import imageRouter from "./routes/images";
 import recipeRouter from "./routes/recipes";
 import ingredientRouter from "./routes/ingredients";
 
@@ -21,7 +20,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/api/users",userRouter)
-app.use("/api/images",imageRouter)
 app.use("/api/recipes",recipeRouter)
 app.use("/api/ingredients",ingredientRouter)
 app.get("/",async (req:Request,res:Response) => {

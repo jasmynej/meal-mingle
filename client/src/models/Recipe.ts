@@ -1,4 +1,5 @@
 import RecipeIngredient from "./RecipeIngredient";
+import RecipeImage from "./RecipeImage";
 
 interface RecipeInt {
     id:String
@@ -6,6 +7,7 @@ interface RecipeInt {
     description:String
     userId:String
     ingredients:RecipeIngredient[]
+    recipeImages:RecipeImage[]
 }
 class Recipe implements RecipeInt{
     description: String;
@@ -13,13 +15,17 @@ class Recipe implements RecipeInt{
     title: String;
     userId: String;
     ingredients: RecipeIngredient[];
-    constructor(id:String,title:String,userId:String,description:String,ingredients:RecipeIngredient[]) {
+    recipeImages: RecipeImage[];
+    constructor(id:String,title:String,userId:String,description:String,ingredients:RecipeIngredient[],recipeImages:RecipeImage[]) {
         this.id = id
         this.title = title
         this.userId = userId
         this.description = description
         this.ingredients = ingredients;
+        this.recipeImages = recipeImages;
     }
+
+    
 
     
 

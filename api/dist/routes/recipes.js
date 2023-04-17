@@ -15,22 +15,61 @@ const recipeRouter = (0, express_1.Router)();
 const prisma = new client_1.PrismaClient();
 recipeRouter.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const recipes = yield prisma.recipe.findMany({
-        include: {
+        select: {
+            id: true,
+            title: true,
+            description: true,
+            user: {
+                select: {
+                    id: true,
+                    username: true
+                }
+            },
+            images: true,
+            categories: {
+                select: {
+                    category: true
+                }
+            },
+            userId: false
+        }
+    });
+    res.json(recipes);
+}));
+recipeRouter.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const recipe = yield prisma.recipe.findFirst({
+        where: {
+            id: req.params.id
+        },
+        select: {
+            id: true,
+            title: true,
+            description: true,
+            user: {
+                select: {
+                    id: true,
+                    username: true
+                }
+            },
+            images: true,
             ingredients: {
-                include: {
+                select: {
+                    ingredientId: true,
+                    amount: true,
+                    unit: true,
+                    direction: true,
                     ingredient: true
                 }
             },
             categories: {
-                include: {
+                select: {
                     category: true
                 }
             },
-            user: true,
-            recipeImages: true
+            userId: false
         }
     });
-    res.json(recipes);
+    res.json(recipe);
 }));
 recipeRouter.get("/category", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const categories = yield prisma.category.findMany({});

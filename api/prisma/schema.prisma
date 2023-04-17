@@ -62,27 +62,23 @@ model RecipeIngredient {
 }
 
 model Recipe {
-  id           String             @id @default(auto()) @map("_id") @db.ObjectId
-  title        String
-  description  String
-  userId       String             @db.ObjectId
-  user         User               @relation(fields: [userId], references: [id])
-  categories   RecipeCategory[]
-  ingredients  RecipeIngredient[]
-  recipeImages RecipeImage[]
-  comments     Comment[]
-  directions   String[]
+  id          String             @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  userId      String             @db.ObjectId
+  user        User               @relation(fields: [userId], references: [id])
+  categories  RecipeCategory[]
+  ingredients RecipeIngredient[]
+  comments    Comment[]
+  directions  String[]
+  images      Image[]
 
   @@map("recipes")
 }
 
-model RecipeImage {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+type Image {
   fileName String
-  recipe   Recipe @relation(fields: [recipeId], references: [id])
-  recipeId String @db.ObjectId
-
-  @@map("recipe_images")
+  s3Link   String
 }
 
 model Comment {

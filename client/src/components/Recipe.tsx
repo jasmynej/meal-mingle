@@ -1,8 +1,14 @@
 import Recipe from "../models/Recipe";
+import Image from "./Image";
 
 function RecipeCard ({recipe}:{recipe:Recipe}): JSX.Element{
+
+
     return (
         <div>
+            <div>
+                <Image image={recipe.recipeImages[0]}/>
+            </div>
             <h3>{recipe.title}</h3>
             <p>{recipe.description}</p>
             <div>
