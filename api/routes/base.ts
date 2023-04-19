@@ -9,4 +9,20 @@ baseRouter.get("/categories",async(req:Request,res:Response)=>{
     res.json(categories)
 })
 
+baseRouter.get("/categories/:id",async (req:Request,res:Response)=>{
+    const category = await prisma.category.findFirst({
+        where:{
+            id:req.params.id
+        },
+        include:{
+            recipes:{
+                include:{
+                    recipe:true
+                }
+            },
+        }
+    })
+    res.json(category)
+})
+
 export default baseRouter;

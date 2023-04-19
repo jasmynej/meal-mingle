@@ -17,4 +17,19 @@ baseRouter.get("/categories", (req, res) => __awaiter(void 0, void 0, void 0, fu
     const categories = yield prisma.category.findMany({});
     res.json(categories);
 }));
+baseRouter.get("/categories/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const category = yield prisma.category.findFirst({
+        where: {
+            id: req.params.id
+        },
+        include: {
+            recipes: {
+                include: {
+                    recipe: true
+                }
+            },
+        }
+    });
+    res.json(category);
+}));
 exports.default = baseRouter;

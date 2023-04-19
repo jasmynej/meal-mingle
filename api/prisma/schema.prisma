@@ -11,15 +11,21 @@ datasource db {
 }
 
 model User {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  username   String    @unique
-  email      String    @unique
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  username   String       @unique
+  email      String       @unique
   password   String
-  created_at DateTime  @default(now())
+  created_at DateTime     @default(now())
   recipes    Recipe[]
   comments   Comment[]
+  profilePic ProfileImage
 
   @@map("users")
+}
+
+type ProfileImage {
+  fileName String
+  s3Link   String
 }
 
 model Category {
@@ -54,7 +60,7 @@ model RecipeIngredient {
   recipeId     String     @db.ObjectId
   ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId String     @db.ObjectId
-  amount       Int
+  amount       Float
   unit         String
   direction    String
 
